@@ -1,25 +1,51 @@
 import streamlit as st
 
 st.set_page_config(
-    page_title="RAG powered by DSPy",
-    page_icon="📝",
+    page_title="Intelligent Dog Breed Assistant",
+    page_icon="🐕",
     layout="centered",
     initial_sidebar_state="auto",
     menu_items=None,
 )
 
-st.title("RAG powered by DSPy")
+st.title("Intelligent Dog Breed Assistant")
 
 st.sidebar.info("Select a demo above.")
 
 st.markdown(
     """
     ## Description
-    This project introduces a [Streamlit](https://streamlit.io) application designed to interface seamlessly with the [DSPy](https://github.com/stanfordnlp/dspy) framework by StanfordNLP, encapsulated within a [FastAPI](https://github.com/tiangolo/fastapi) backend. It offers an intuitive and interactive frontend solution, showcasing the capabilities of DSPy through a user-friendly web interface. The application leverages [Ollama](https://github.com/ollama/ollama) for language and embedding models, [Chroma DB](https://github.com/chroma-core/chroma) for vector storage, and [Arize Phoenix](https://github.com/Arize-ai/phoenix) for an observability layer.
+    This [Streamlit](https://streamlit.io) application serves as an intelligent question-answering system designed to help users find information about dog breeds. 
+    Powered by the [DSPy](https://github.com/stanfordnlp/dspy) framework and backed by [FastAPI](https://github.com/tiangolo/fastapi), 
+    it provides comprehensive information about various dog breeds through both natural language understanding and data analytics capabilities.
 
-    In a notable application of this system, the Retrieval-Augmented Generation (RAG) process is performed on the insightful essay "What I Worked On" by Paul Graham. 
+    ### Key Features
+    - **Natural Language Understanding**: Ask questions about breed recommendations and characteristics
+    - **Data Analytics**: Get insights about breed statistics and comparisons
+    - **Comprehensive Dataset**: Access detailed information about:
+        - Physical attributes
+        - Behavioral characteristics
+        - Care requirements
+        - Training attributes
+        - Breed classifications
+        - Historical information
+        - Popularity metrics
+
+    ### Technology Stack
+    - **Backend**: FastAPI with DSPy framework
+    - **Frontend**: Streamlit interface
+    - **Language Models**: [Ollama](https://github.com/ollama/ollama)
+    - **Vector Storage**: [Chroma DB](https://github.com/chroma-core/chroma)
+    - **Monitoring**: [Arize Phoenix](https://github.com/Arize-ai/phoenix)
+
+    ### Example Queries
+    Try asking questions like:
+    - "I have young kids and limited time for grooming. Which breed would suit my family?"
+    - "List the 5 most popular breeds in the dataset"
+    - "Which breeds live the longest on average?"
+    - "What breeds are known for being both protective and good with families?"
 
     ### Info
-    [GitHub](https://github.com/diicellman/dspy-rag-fastapi)
-"""
+    [GitHub Repository](https://github.com/yourusername/dog-breed-assistant)
+    """
 )
