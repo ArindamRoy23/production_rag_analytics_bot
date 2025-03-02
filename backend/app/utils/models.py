@@ -1,7 +1,7 @@
 """Pydantic models."""
 
 from pydantic import BaseModel
-from typing import List
+from typing import List, Optional
 import dspy
 
 class MessageData(BaseModel):
@@ -10,9 +10,10 @@ class MessageData(BaseModel):
     query: str
     # chat_history: List[dict] | None
     ollama_model_name: str
-    temperature: float
-    top_p: float
-    max_tokens: int
+    temperature: float = 0.7
+    top_p: float = 0.9
+    max_tokens: int = 1000
+    pipeline_id: Optional[int] = None
 
 
 class RAGResponse(BaseModel):

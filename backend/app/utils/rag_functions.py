@@ -323,4 +323,3 @@ if __name__ == "__main__":
                                     top_p=0.9, 
                                     max_tokens=1000),
                                     pipeline_id=2)
-    print(r)

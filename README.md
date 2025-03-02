@@ -1,29 +1,47 @@
-# Full-Stack DSPy Application with FastAPI and Streamlit
+# Intelligent Dog Breed Assistant
 
 ## Introduction
 
-This project is a full-stack application designed to leverage natural language processing capabilities entirely locally and to integrate with the [DSPy](https://github.com/stanfordnlp/dspy) framework developed by StanfordNLP. It features a [FastAPI](https://github.com/tiangolo/fastapi) backend for processing and a [Streamlit](https://streamlit.io) frontend for interactive user interfaces. This implementation is fully local, integrating cutting-edge technologies such as [Ollama](https://github.com/ollama/ollama) for language and embedding models, [Chroma DB](https://github.com/chroma-core/chroma) for vector storage, and [Arize Phoenix](https://github.com/Arize-ai/phoenix) for observability. This setup ensures all operations, from processing to data storage, are executed on the local machine, enhancing privacy, data security, and ease of use.
+This project is an intelligent question-answering system designed to help users find information about dog breeds. It leverages the [DSPy](https://github.com/stanfordnlp/dspy) framework for natural language processing, with a [FastAPI](https://github.com/tiangolo/fastapi) backend and [Streamlit](https://streamlit.io) frontend. The system runs entirely locally, using [Ollama](https://github.com/ollama/ollama) for language models, [Chroma DB](https://github.com/chroma-core/chroma) for vector storage, and [Arize Phoenix](https://github.com/Arize-ai/phoenix) for observability.
 
 ## Features
 
-- **Fully Local Execution**: Ensures privacy and security by running all processes on your local machine without external dependencies.
-- **Ollama Integration**: Leverages the powerful Ollama for language and embedding models.
-- **Chroma DB Vector Storage**: Utilizes Chroma DB for efficient, scalable vector storage, enabling quick and precise information retrieval.
-- **Arize Phoenix Observability**: Integrates Arize Phoenix for real-time monitoring and analytics, aiding in performance improvement and system health tracking.
-- **FastAPI Backend**: Offers robust and scalable API endpoints for interacting with the NLP models and performing various queries and compilations.
-- **Streamlit Frontend**: Provides an intuitive and interactive UI for users to easily interact with the backend services, improving the overall user experience.
+- **Comprehensive Dog Breed Information**: Access detailed information about various dog breeds including physical attributes, behavioral characteristics, care requirements, and more
+- **Dual Query Processing**:
+  - Natural Language Understanding: Handles semantic questions about breed recommendations and characteristics
+  - Data Analytics: Processes numerical queries about breed statistics and comparisons
+- **Interactive Web Interface**: Clean and functional Streamlit UI with conversation history
+- **Advanced NLP Pipeline**: Powered by DSPy and Ollama
+- **Efficient Data Storage**: Vector database implementation using Chroma DB
+- **Performance Monitoring**: Real-time system monitoring with Arize Phoenix
 
 ## Architecture
 
-This full-stack application combines the DSPy Framework with Ollama, Arize Phoenix, and Chroma DB in a cohesive ecosystem. Here's a brief overview of the system components:
+The application combines several powerful technologies to create a robust dog breed information system:
 
-- **DSPy Framework**: Serves as the core for language model interactions, offering advanced NLP capabilities.
-- **Ollama**: Acts as the backend engine for language understanding and generation.
-- **Chroma DB**: Provides efficient vector storage solutions, essential for NLP tasks like semantic search.
-- **Arize Phoenix**: Enhances visibility into the application's performance and health.
-- **FastAPI**: Facilitates the backend logic, handling API requests and responses.
-- **Streamlit**: Creates the frontend interface, enabling users to engage with the backend services visually.
+- **DSPy Framework**: Powers the core NLP capabilities for understanding and processing breed-related queries
+- **Ollama**: Provides the language model backend for natural language understanding
+- **Chroma DB**: Enables efficient vector storage for quick breed information retrieval
+- **Arize Phoenix**: Monitors system performance and query processing
+- **FastAPI**: Handles API requests with a single endpoint for both NLP and analytical queries
+- **Streamlit**: Delivers an intuitive user interface for interacting with the dog breed database
 
+## API Specification
+
+The system exposes an endpoint with the following interface:
+
+```json
+# Input Parameters:
+{
+    "user_id": string,  # Unique identifier for the user
+    "query": string     # User's question about dog breeds
+}
+
+# Response:
+{
+    "answer": string    # Generated response to the query
+}
+```
 
 ## Installation
 
@@ -31,16 +49,30 @@ This full-stack application combines the DSPy Framework with Ollama, Arize Phoen
 
 - Docker and Docker-Compose
 - Git (optional, for cloning the repository)
-- Ollama,  follow the [readme](https://github.com/ollama/ollama) to set up and run a local Ollama instance.
+- Ollama, follow the [readme](https://github.com/ollama/ollama) to set up and run a local Ollama instance.
+
+### Dataset
+
+The system uses a comprehensive dog breeds dataset that includes:
+- Physical attributes (height, weight, lifespan)
+- Behavioral characteristics and temperament
+- Care requirements
+- Training attributes
+- Breed classifications
+- Historical information
+- Popularity metrics
+
+The dataset can be accessed from [Kaggle Dog Breeds Dataset](https://www.kaggle.com/api/v1/datasets/download/mexwell/dog-breeds-dataset).
 
 ### Clone the Repository
 
 First, clone the repository to your local machine (skip this step if you have the project files already).
 
 ```bash
-git clone https://github.com/diicellman/dspy-rag-fastapi.git
-cd dspy-rag-fastapi
+git clone https://github.com/yourusername/dog-breed-assistant.git
+cd dog-breed-assistant
 ```
+
 ### Getting Started with Local Development
 
 #### Backend setup
@@ -111,7 +143,19 @@ This project now supports Docker Compose for easier setup and deployment, includ
 
 ## Usage
 
-The FastAPI and Streamlit integration allows for seamless interaction between the user and the NLP backend. Utilize the FastAPI endpoints for NLP tasks and visualize results and interact with the system through the Streamlit frontend.
+The system can handle two types of queries:
+
+### Natural Language Questions
+Examples of supported natural language queries:
+- "I have young kids and limited time for grooming. Which breed would suit my family?"
+- "What breeds are known for being both protective and good with families?"
+- "I'm looking for a tall, graceful dog with a flowing coat and independent personality"
+
+### Analytical Queries
+Examples of supported analytical queries:
+- "List the 5 most popular breeds in the dataset"
+- "Which breeds live the longest on average?"
+- "Show me all large dogs (over 60cm) ordered by weight"
 
 
 ## Contributing
