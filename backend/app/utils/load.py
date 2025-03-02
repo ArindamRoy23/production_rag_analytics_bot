@@ -3,6 +3,7 @@
 import logging
 import os
 import re
+import pandas as pd
 
 import chromadb
 from chromadb import Documents, EmbeddingFunction, Embeddings
@@ -57,31 +58,22 @@ class OllamaEmbeddingFunction(EmbeddingFunction[Documents]):
 
         return embeddings
 
-
-def load_data() -> None:
+def load_csv_data(input_file: str = "data/akc-data-latest.csv",
+                  collection_name: str = "dogs") -> None:        
     """
     Loads data from /data/example to Chroma Vector store.
     """
 
-    logger.info("Loading data.")
-    # Split document into single sentences
-    chunks = []
-    with open(
-        f"{DATA_DIR}/example/paul_graham_essay.txt", "r", encoding="utf-8"
-    ) as file:
-        text = file.read()
-        sentences = re.split(r"(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s", text)
-        sentences = [sentence.strip() for sentence in sentences if sentence.strip()]
-        chunks.extend(sentences)
-
-    logger.info("Creating embeddings.")
+    logger.info("Loading csv data.")
+    df = pd.read_csv(input_file).rename(columns={'Unnamed: 0': 'breed_name'})
+    chunks = df.apply(lambda row: '/n /n'.join([str(k) + ': ' + str(v)  
+                                                   for k,v in row.items()]), axis=1).tolist()
+    
     ollama_ef = OllamaEmbeddingFunction(host=ollama_base_url)
-    chunks_embeddings = ollama_ef(chunks)
+    chunks_embeddings = ollama_ef(chunks.to_list())
 
     db = chromadb.PersistentClient(path=f"{DATA_DIR}/chroma_db")
-    chroma_collection = db.get_or_create_collection("quickstart")
-
-    logger.info("Loading data in Chroma.")
+    chroma_collection = db.get_or_create_collection(collection_name)
     chroma_collection.add(
         ids=[f"id{i}" for i in range(1, len(chunks) + 1)],
         embeddings=chunks_embeddings,
@@ -89,6 +81,59 @@ def load_data() -> None:
     )
     logger.info("Successfully loaded embeddings in the Chroma.")
 
+def load_pipeline_description(input_file: str = "data/pipeline_description.csv",
+                              collection_name: str = "pipeline_description"):
+    """
+    Loads data from /data/pipeline_description.txt to Chroma Vector store.
+    """
+
+    logger.info("Loading pipeline description.")
+    df = pd.read_csv(input_file)
+    chunks = df['Description'].tolist()
+
+    ollama_ef = OllamaEmbeddingFunction(host=ollama_base_url)
+    chunks_embeddings = ollama_ef(chunks)
+
+    db = chromadb.PersistentClient(path=f"{DATA_DIR}/chroma_db")
+    chroma_collection = db.get_or_create_collection(collection_name)
+    chroma_collection.add(
+        ids=df.ID.astype('str').tolist(),
+        embeddings=chunks_embeddings,
+        documents=chunks,
+    )
+    logger.info("Successfully loaded embeddings in the Chroma.")
+
+# def load_data() -> None:
+#     """
+#     Loads data from /data/example to Chroma Vector store.
+#     """
+
+#     logger.info("Loading data.")
+#     # Split document into single sentences
+#     chunks = []
+#     with open(
+#         f"{DATA_DIR}/example/paul_graham_essay.txt", "r", encoding="utf-8"
+#     ) as file:
+#         text = file.read()
+#         sentences = re.split(r"(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s", text)
+#         sentences = [sentence.strip() for sentence in sentences if sentence.strip()]
+#         chunks.extend(sentences)
+
+#     logger.info("Creating embeddings.")
+#     ollama_ef = OllamaEmbeddingFunction(host=ollama_base_url)
+#     chunks_embeddings = ollama_ef(chunks)
+
+#     db = chromadb.PersistentClient(path=f"{DATA_DIR}/chroma_db")
+#     chroma_collection = db.get_or_create_collection("quickstart")
+
+#     logger.info("Loading data in Chroma.")
+#     chroma_collection.add(
+#         ids=[f"id{i}" for i in range(1, len(chunks) + 1)],
+#         embeddings=chunks_embeddings,
+#         documents=chunks,
+#     )
+#     logger.info("Successfully loaded embeddings in the Chroma.")
+
 
 if __name__ == "__main__":
-    load_data()
+    load_pipeline_description()

@@ -1,0 +1,78 @@
+﻿ID,Description
+1,"Natural Language Processing (NLP) Pipeline
+The NLP pipeline is designed to understand and semantically process user queries that involve subjective descriptions, context, and preferences. Key steps in this pipeline include:
+
+Preprocessing:
+Cleaning the input text by removing stop words, punctuation, and applying techniques such as tokenization and lemmatization. This prepares the query for further analysis.
+
+Intent and Entity Recognition:
+Using models (e.g., transformer-based language models) to detect the user’s intent and extract relevant entities (such as ""young kids,"" ""limited time for grooming,"" or ""protective"") which map to specific breed characteristics.
+
+Contextual Analysis:
+Assessing the overall context of the query to handle nuances like family-friendliness, grooming requirements, or temperament. This step ensures that the assistant can correctly interpret complex descriptions.
+
+Semantic Matching:
+Mapping the extracted entities and intents to attributes in the dog breed dataset. For example, correlating “protective” or “good with families” to behavioral and temperament ratings in the dataset.
+
+Response Generation:
+Once the query is semantically parsed, the system combines the insights from the extracted data with a natural language generation module to produce a clear, conversational answer that aligns with the user's request.
+
+Five Examples of NLP Pipeline Queries
+Family & Grooming Concern:
+Query: “I have young kids and limited time for grooming. Which breed would suit my family?”
+Processing: The system identifies “young kids” (child-friendly), “limited time for grooming” (low-maintenance coat), and then maps these requirements to breed profiles that meet these criteria.
+
+Protective and Family-Friendly:
+Query: “What breeds are known for being both protective and good with families?”
+Processing: The pipeline extracts the dual intent – looking for dogs with high protective instincts as well as sociable, family-friendly behavior – and filters breeds accordingly.
+
+Physical & Aesthetic Descriptions:
+Query: “I'm looking for a tall, graceful dog with a flowing coat and independent personality.”
+Processing: The system parses physical descriptors (tall, graceful, flowing coat) and personality traits (independent), linking them to breed standards in the dataset.
+
+Hypoallergenic Preference:
+Query: “Which dog breeds are hypoallergenic?”
+Processing: Keywords like “hypoallergenic” trigger a lookup for breeds known to shed less or possess fur that is suitable for people with allergies.
+
+Apartment Suitability:
+Query: “What are the best dogs for apartment living?”
+Processing: The assistant identifies the context (living in an apartment) and correlates this with traits like low energy, smaller size, or adaptability to indoor spaces, and recommends breeds that excel in these areas."
+2,"Data Analytics Pipeline
+The Data Analytics pipeline is focused on handling queries that require precise numerical analysis and data manipulation. This pipeline typically involves the following steps:
+
+Query Classification:
+Distinguishing between natural language inquiries and those that demand structured data analysis. For data analytics queries, the system interprets numerical parameters and aggregation functions.
+
+Parsing and Translation:
+Converting the query into a structured command (e.g., SQL or a pandas DataFrame operation). This involves parsing key terms like “top 5,” “longest,” “ordered by weight,” etc.
+
+Data Filtering and Aggregation:
+Using the parsed command to filter the dataset based on numerical or categorical conditions (e.g., height, weight, lifespan). Aggregation functions (mean, count, max, min) are then applied where necessary.
+
+Sorting and Ranking:
+Ordering the results based on specified metrics (e.g., weight, popularity, lifespan) and retrieving the top entries as requested.
+
+Result Formatting:
+The final data output is formatted into a user-friendly response, sometimes with visualizations or tables if needed. The answer is then returned in plain language, summarizing the numerical insights.
+
+Five Examples of Data Analytics Pipeline Queries
+Popularity Ranking:
+Query: “List the 5 most popular breeds in the dataset.”
+Processing: The system aggregates popularity metrics, sorts the breeds in descending order of popularity, and selects the top five.
+
+Lifespan Analysis:
+Query: “Which breeds live the longest on average?”
+Processing: This involves computing the average lifespan for each breed, comparing these averages, and returning breeds with the highest values.
+
+Size and Weight Filtering:
+Query: “Show me all large dogs (over 60cm) ordered by weight.”
+Processing: The pipeline filters breeds by the height threshold, then sorts the remaining entries by weight, either ascending or descending based on the query’s intent.
+
+Training and Temperament Scores:
+Query: “Which breeds have the highest trainability scores?”
+Processing: Here, the system analyzes training-related metrics in the dataset, ranks the breeds according to trainability, and outputs the top performers.
+
+Aggregate Care Requirements:
+Query: “What is the average grooming time required for small breeds?”
+Processing: The system filters the dataset to only include small breeds, then calculates the mean grooming time (if such a metric is available) to provide a comprehensive answer.
+"
