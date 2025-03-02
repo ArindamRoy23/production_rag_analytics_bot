@@ -97,7 +97,7 @@ with st.sidebar:
         "top_p", min_value=0.01, max_value=1.0, value=0.9, step=0.01
     )
     max_tokens = st.sidebar.slider(
-        "max_tokens", min_value=32, max_value=150, value=120, step=8
+        "max_tokens", min_value=32, max_value=1500, value=1000, step=8
     )
 
 uploaded_file = st.file_uploader("Choose a CSV file", type="csv")

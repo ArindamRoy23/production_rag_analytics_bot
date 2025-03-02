@@ -52,6 +52,8 @@ class OllamaEmbeddingFunction(EmbeddingFunction[Documents]):
 
         embeddings = []
         # Call Ollama Embedding API for each document.
+        if isinstance(input, str):
+            input = [input]
         for document in input:
             embedding = self._client.embeddings(model=self._model_name, prompt=document)
             embeddings.append(embedding["embedding"])
