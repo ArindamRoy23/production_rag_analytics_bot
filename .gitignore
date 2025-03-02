@@ -165,3 +165,8 @@ backend/data/*.json
 *.DS_store
 */.streamlit
 0.5.0
+
+.vscode
+.vscode/*
+
+data/*
