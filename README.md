@@ -162,3 +162,35 @@ Examples of supported analytical queries:
 
 Contributions are welcome! Please feel free to submit pull requests or create issues for bugs, questions, and suggestions.
 
+## Pipeline Architecture
+
+The system implements a dual-pipeline architecture for processing different types of queries:
+
+### Query Pipeline Selection
+The system automatically determines which pipeline to use based on the query type:
+- **NLP Pipeline**: Handles natural language questions about dog breeds, characteristics, and recommendations
+- **Analytics Pipeline**: Processes data-focused queries requiring statistical analysis
+
+The selection process uses an embedding-based approach that compares the user's query against pre-defined pipeline descriptions to route it to the most appropriate handler.
+
+### NLP Pipeline
+The Natural Language Processing pipeline leverages DSPy's RAG (Retrieval-Augmented Generation) architecture to:
+1. Retrieve relevant context about dog breeds from the knowledge base
+2. Generate natural language responses using the Ollama language model
+3. Provide comprehensive answers with supporting context from the retrieved documents
+
+This pipeline is optimal for queries like "Which breeds are good with children?" or "Tell me about German Shepherd temperament."
+
+### Analytics Pipeline
+The Analytics pipeline is designed for data-driven queries and follows these steps:
+1. Loads the dog breed dataset into a pandas DataFrame
+2. Generates appropriate Python/pandas code based on the query
+3. Safely executes the analysis in an isolated environment
+4. Formats the results into a natural language response
+
+This pipeline excels at handling queries like "What are the top 5 heaviest breeds?" or "Compare average lifespans between small and large dogs."
+
+Both pipelines maintain consistent response formatting while optimizing for their specific query types, ensuring users receive the most appropriate and accurate information for their needs.
+
+
+# Credits: [https://github.com/diicellman/dspy-rag-fastapi]
