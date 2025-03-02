@@ -166,7 +166,9 @@ backend/data/*.json
 */.streamlit
 0.5.0
 
-.vscode
-.vscode/*
+# VSCode
+.vscode/
 
-data/*
+# Data files
+data/chroma_db
+data/chroma_db/*
