@@ -67,7 +67,7 @@ def load_csv_data(input_file: str = "data/akc-data-latest.csv",
     logger.info("Loading csv data.")
     df = pd.read_csv(input_file).rename(columns={'Unnamed: 0': 'breed_name'})
     chunks = df.apply(lambda row: '/n /n'.join([str(k) + ': ' + str(v)  
-                                                   for k,v in row.items()]), axis=1).tolist()
+                                                   for k,v in row.items()]), axis=1)
     
     ollama_ef = OllamaEmbeddingFunction(host=ollama_base_url)
     chunks_embeddings = ollama_ef(chunks.to_list())
@@ -99,7 +99,7 @@ def load_pipeline_description(input_file: str = "data/pipeline_description.csv",
     chroma_collection.add(
         ids=df.ID.astype('str').tolist(),
         embeddings=chunks_embeddings,
-        documents=chunks,
+        documents=[str(chunk) for chunk in chunks],
     )
     logger.info("Successfully loaded embeddings in the Chroma.")
 
@@ -136,4 +136,4 @@ def load_pipeline_description(input_file: str = "data/pipeline_description.csv",
 
 
 if __name__ == "__main__":
-    load_pipeline_description()
+    load_csv_data()

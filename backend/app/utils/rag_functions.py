@@ -23,7 +23,7 @@ ollama_base_url = os.getenv("OLLAMA_BASE_URL", "localhost")
 ollama_embedding_function = OllamaEmbeddingFunction(host=ollama_base_url)
 
 retriever_model = ChromadbRM(
-    "quickstart",
+    "dogs",
     f"{DATA_DIR}/chroma_db",
     embedding_function=ollama_embedding_function,
     k=5,
@@ -47,7 +47,9 @@ def get_zero_shot_query(payload: MessageData):
     # )
     with dspy.context(lm=ollama_lm):
         pred = rag(
-            question=payload.query,  # chat_history=parsed_chat_history
+            # question=parsed_chat_history +  "user: " + payload.query, 
+            question=payload.query, 
+
         )
 
     return RAGResponse(
@@ -140,3 +142,16 @@ def get_list_ollama_models():
         return {"models": [], "error": str(e)}
 
     return {"models": models}
+
+
+
+if __name__ == "__main__":
+    output = get_zero_shot_query(MessageData(query="I live in a small apartment. What is the best breed for me?",
+                                    # chat_history=[{"role": "user", "content": "I want to buy a dog. What is the best breed for me?"},
+                                    #               {"role": "assistant", "content": "Tell me about your lifestyle and preferences. \
+                                    #                I will recommend the best breed for you."}],
+                                    ollama_model_name="llama3.2:latest", 
+                                    temperature=0.5, 
+                                    top_p=0.9, 
+                                    max_tokens=100))   
+    print(output)

@@ -7,11 +7,11 @@ DATA_DIR = "data"
 
 
 class GenerateAnswer(dspy.Signature):
-    """Answer questions with short factoid answers."""
+    """Answer questions with comprehensive answers."""
 
     context = dspy.InputField(desc="may contain relevant facts")
     question = dspy.InputField()
-    answer = dspy.OutputField(desc="often between 1 and 5 words")
+    answer = dspy.OutputField(desc="Long answer for dog lovers")    
 
 
 class RAG(dspy.Module):

@@ -13,5 +13,17 @@
                 "PYTHONPATH": "${workspaceFolder}/backend"
             }
         },
+        {
+            "name": "Python: RAG Functions Script",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/backend/app/utils/rag_functions.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "cwd": "${workspaceFolder}/backend",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/backend"
+            }
+        }
     ]
 } 
