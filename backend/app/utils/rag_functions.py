@@ -123,11 +123,20 @@ def get_compiled_rag(payload: MessageData):
 
 
 def get_list_ollama_models():
-    client = ollama.Client(host=ollama_base_url)
+    # Use OLLAMA_HOST if available, otherwise fall back to OLLAMA_BASE_URL
+    host = os.getenv("OLLAMA_HOST", ollama_base_url)
+    # Remove trailing slash if present
+    if host.endswith('/'):
+        host = host[:-1]
+    client = ollama.Client(host=host)
 
     models = []
-    models_list = client.list()
-    for model in models_list["models"]:
-        models.append(model["name"])
+    try:
+        models_list = client.list()
+        for model in models_list["models"]:
+            models.append(model["name"])
+    except Exception as e:
+        print(f"Error connecting to Ollama: {e}")
+        return {"models": [], "error": str(e)}
 
     return {"models": models}
