@@ -193,4 +193,6 @@ This pipeline excels at handling queries like "What are the top 5 heaviest breed
 Both pipelines maintain consistent response formatting while optimizing for their specific query types, ensuring users receive the most appropriate and accurate information for their needs.
 
 
-# Credits: [https://github.com/diicellman/dspy-rag-fastapi]
+## Credits: 
+
+[https://github.com/diicellman/dspy-rag-fastapi]
