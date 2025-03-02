@@ -139,3 +139,5 @@ def load_pipeline_description(input_file: str = "data/pipeline_description.csv",
 
 if __name__ == "__main__":
     load_csv_data()
+    load_pipeline_description()
+    print("Data loaded successfully.")
